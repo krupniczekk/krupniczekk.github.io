@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>TT & YT for all</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f0f0f;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.card {
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    width: 100%;
+    max-width: 500px;
+}
+
+iframe {
+    width: 100%;
+    height: 300px;
+    border-radius: 12px;
+    border: none;
+}
+
+@media (max-width: 900px) {
+    .main {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h1>TT & YT for all</h1>
+
+<div class="main">
+    
+    <div class="column">
+        <h2>TikTok</h2>
+        <div id="tiktokContainer"></div>
+    </div>
+
+    <div class="column">
+        <h2>YouTube</h2>
+        <div id="youtubeContainer"></div>
+    </div>
+
+</div>
+
+<script async src="https://www.tiktok.com/embed.js"></script>
+
+<script>
+
+// TIKTOK ID
+const tiktoks = [
+"7611972856301309206",
+"7611947135767940382",
+"7586642854655692054"
+];
+
+// YOUTUBE ID
+const youtubes = [
+"S8qV5MguYek",
+"dQw4w9WgXcQ",
+"3JZ_D3ELwOQ"
+];
+
+// LOSOWANIE
+function randomItem(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
+// TIKTOK
+function addTikTok() {
+    const id = randomItem(tiktoks);
+
+    const div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+    <blockquote class="tiktok-embed"
+        cite="https://www.tiktok.com/video/${id}"
+        data-video-id="${id}"
+        style="max-width: 100%;">
+        <section></section>
+    </blockquote>
+    `;
+
+    document.getElementById("tiktokContainer").appendChild(div);
+
+    if (window.tiktokEmbedLoad) {
+        window.tiktokEmbedLoad();
+    }
+}
+
+// YOUTUBE — NAPRAWIONY BŁĄD 153
+function addYouTube() {
+    const id = randomItem(youtubes);
+
+    const div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+    <iframe 
+        src="https://www.youtube.com/embed/${id}?rel=0&enablejsapi=1"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+    </iframe>
+    `;
+
+    document.getElementById("youtubeContainer").appendChild(div);
+}
+
+// START
+for (let i = 0; i < 3; i++) {
+    addTikTok();
+    addYouTube();
+}
+
+// NIESKOŃCZONY SCROLL
+window.addEventListener("scroll", () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+        addTikTok();
+        addYouTube();
+    }
+});
+
+</script>
+
+</body>
+</html>
