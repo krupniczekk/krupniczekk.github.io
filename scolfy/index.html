@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<title>Scolfy By KRUPNICZEKK</title>
+<title>TT & YT for all</title>
 
 <style>
 body {
@@ -77,25 +77,41 @@ iframe {
 
 <script>
 
-// TIKTOK ID
+// =================
+// TIKTOK (lista)
 const tiktoks = [
 "7611972856301309206",
 "7611947135767940382",
 "7586642854655692054"
 ];
 
-// YOUTUBE ID
-const youtubes = [
-"S8qV5MguYek",
-"dQw4w9WgXcQ",
-"3JZ_D3ELwOQ"
+// =================
+// YOUTUBE API KLUCZ
+const API_KEY = "AIzaSyAgDOKcY-lfPjP0wW0hTwxYEXe0iXte0Uo";
+
+// losowe słowa żeby dawało różne filmy
+const queries = [
+"funny",
+"gaming",
+"minecraft",
+"memes",
+"cars",
+"football",
+"science",
+"animals",
+"technology",
+"random"
 ];
+
+// zapamiętuje użyte filmy
+let usedVideos = new Set();
 
 // LOSOWANIE
 function randomItem(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
+// =================
 // TIKTOK
 function addTikTok() {
     const id = randomItem(tiktoks);
@@ -119,17 +135,37 @@ function addTikTok() {
     }
 }
 
-// YOUTUBE — NAPRAWIONY BŁĄD 153
-function addYouTube() {
-    const id = randomItem(youtubes);
+// =================
+// YOUTUBE PRAWDZIWE LOSOWE
+async function addYouTube() {
+
+    let videoId = null;
+
+    while (!videoId) {
+        const query = randomItem(queries);
+
+        const url =
+        `https://www.googleapis.com/youtube/v3/search?` +
+        `part=snippet&type=video&maxResults=10&q=${query}&key=${API_KEY}`;
+
+        const res = await fetch(url);
+        const data = await res.json();
+
+        for (let item of data.items) {
+            if (!usedVideos.has(item.id.videoId)) {
+                videoId = item.id.videoId;
+                usedVideos.add(videoId);
+                break;
+            }
+        }
+    }
 
     const div = document.createElement("div");
     div.className = "card";
 
     div.innerHTML = `
     <iframe 
-        src="https://www.youtube.com/embed/${id}?rel=0&enablejsapi=1"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        src="https://www.youtube.com/embed/${videoId}"
         allowfullscreen>
     </iframe>
     `;
@@ -143,7 +179,7 @@ for (let i = 0; i < 3; i++) {
     addYouTube();
 }
 
-// NIESKOŃCZONY SCROLL
+// SCROLL
 window.addEventListener("scroll", () => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
         addTikTok();
