@@ -7,14 +7,13 @@
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: Arial;
     background: #0f0f0f;
     color: white;
 }
 
 h1 {
     text-align: center;
-    margin: 20px;
 }
 
 .main {
@@ -28,29 +27,22 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 25px;
+    gap: 20px;
 }
 
 .card {
     background: #1a1a1a;
-    padding: 15px;
-    border-radius: 20px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.6);
-    width: 100%;
+    padding: 10px;
+    border-radius: 15px;
+    width: 90%;
     max-width: 500px;
 }
 
 iframe {
     width: 100%;
     height: 300px;
-    border-radius: 12px;
     border: none;
-}
-
-@media (max-width: 900px) {
-    .main {
-        grid-template-columns: 1fr;
-    }
+    border-radius: 10px;
 }
 </style>
 </head>
@@ -60,17 +52,15 @@ iframe {
 <h1>TT & YT for all</h1>
 
 <div class="main">
-    
-    <div class="column">
-        <h2>TikTok</h2>
-        <div id="tiktokContainer"></div>
-    </div>
+<div class="column">
+<h2>TikTok</h2>
+<div id="tiktokContainer"></div>
+</div>
 
-    <div class="column">
-        <h2>YouTube</h2>
-        <div id="youtubeContainer"></div>
-    </div>
-
+<div class="column">
+<h2>YouTube</h2>
+<div id="youtubeContainer"></div>
+</div>
 </div>
 
 <script async src="https://www.tiktok.com/embed.js"></script>
@@ -78,50 +68,66 @@ iframe {
 <script>
 
 // =================
-// TIKTOK (lista)
-const tiktoks = [
+// NOWY KLUCZ API
+const API_KEY = "AIzaSyAgDOKcY-lfPjP0wW0hTwxYEXe0iXte0Uo";
+
+// =================
+// TIKTOKI
+let tiktoks = [
 "7611972856301309206",
 "7611947135767940382",
-"7586642854655692054"
+"7586642854655692054",
+"7600000000000000000",
+"7590000000000000000"
+];
+
+let usedTikToks = [];
+
+// =================
+// YOUTUBE
+let usedVideos = new Set();
+
+const queries = [
+"funny",
+"memes",
+"gaming",
+"minecraft",
+"science",
+"football",
+"cars",
+"random",
+"animals",
+"technology"
 ];
 
 // =================
-// YOUTUBE API KLUCZ
-const API_KEY = "AIzaSyAgDOKcY-lfPjP0wW0hTwxYEXe0iXte0Uo";
-
-// losowe słowa żeby dawało różne filmy
-const queries = [
-"funny",
-"gaming",
-"minecraft",
-"memes",
-"cars",
-"football",
-"science",
-"animals",
-"technology",
-"random"
-];
-
-// zapamiętuje użyte filmy
-let usedVideos = new Set();
-
-// LOSOWANIE
-function randomItem(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+// TASOWANIE
+function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
 }
 
 // =================
-// TIKTOK
+// TIKTOK LOSOWY BEZ POWTÓREK
+function getRandomTikTok() {
+
+    if (usedTikToks.length === 0) {
+        usedTikToks = shuffle([...tiktoks]);
+    }
+
+    return usedTikToks.pop();
+}
+
+// =================
+// DODAJ TIKTOK
 function addTikTok() {
-    const id = randomItem(tiktoks);
+
+    const id = getRandomTikTok();
 
     const div = document.createElement("div");
     div.className = "card";
 
     div.innerHTML = `
     <blockquote class="tiktok-embed"
-        cite="https://www.tiktok.com/video/${id}"
         data-video-id="${id}"
         style="max-width: 100%;">
         <section></section>
@@ -139,17 +145,19 @@ function addTikTok() {
 // YOUTUBE PRAWDZIWE LOSOWE
 async function addYouTube() {
 
-    let videoId = null;
+    try {
 
-    while (!videoId) {
-        const query = randomItem(queries);
+        const query = queries[Math.floor(Math.random()*queries.length)];
 
         const url =
-        `https://www.googleapis.com/youtube/v3/search?` +
-        `part=snippet&type=video&maxResults=10&q=${query}&key=${API_KEY}`;
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=5&q=${query}&key=${API_KEY}`;
 
         const res = await fetch(url);
         const data = await res.json();
+
+        console.log(data);
+
+        let videoId = null;
 
         for (let item of data.items) {
             if (!usedVideos.has(item.id.videoId)) {
@@ -158,30 +166,38 @@ async function addYouTube() {
                 break;
             }
         }
-    }
 
-    const div = document.createElement("div");
-    div.className = "card";
+        if (!videoId) return;
 
-    div.innerHTML = `
-    <iframe 
+        const div = document.createElement("div");
+        div.className = "card";
+
+        div.innerHTML = `
+        <iframe 
         src="https://www.youtube.com/embed/${videoId}"
         allowfullscreen>
-    </iframe>
-    `;
+        </iframe>
+        `;
 
-    document.getElementById("youtubeContainer").appendChild(div);
+        document.getElementById("youtubeContainer").appendChild(div);
+
+    } catch (err) {
+        console.log("YouTube error:", err);
+    }
+
 }
 
+// =================
 // START
 for (let i = 0; i < 3; i++) {
     addTikTok();
     addYouTube();
 }
 
+// =================
 // SCROLL
 window.addEventListener("scroll", () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
         addTikTok();
         addYouTube();
     }
