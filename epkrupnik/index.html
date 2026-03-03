@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPKRUPNIK - Pobierz aplikację</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #0a0014, #1a0033);
+      color: #eee;
+    }
+
+    header {
+      background: linear-gradient(90deg, #2a0050, #5a00a8);
+      color: white;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(170, 0, 255, 0.4);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 40px;
+      letter-spacing: 2px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 25px;
+      background: rgba(20, 0, 40, 0.9);
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(140, 0, 255, 0.3);
+      border: 1px solid rgba(140, 0, 255, 0.3);
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    h2 {
+      color: #c084ff;
+    }
+
+    .downloads {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: linear-gradient(145deg, #140028, #1f003d);
+      padding: 20px;
+      border-radius: 14px;
+      text-align: center;
+      border: 1px solid #7b2cff;
+      box-shadow: 0 0 15px rgba(123, 44, 255, 0.4);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 0 25px rgba(170, 0, 255, 0.8);
+    }
+
+    .card h3 {
+      margin-bottom: 15px;
+      color: #d8b4ff;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      background: linear-gradient(90deg, #6a00ff, #aa00ff);
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      margin-top: 10px;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(170, 0, 255, 0.7);
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: linear-gradient(90deg, #aa00ff, #d000ff);
+      box-shadow: 0 0 20px rgba(200, 0, 255, 1);
+      transform: scale(1.05);
+    }
+
+    details {
+      margin-top: 15px;
+      padding: 15px;
+      background: rgba(30, 0, 60, 0.8);
+      border-radius: 10px;
+      border: 1px solid #6a00ff;
+      box-shadow: 0 0 10px rgba(106, 0, 255, 0.4);
+    }
+
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+      color: #e0c3ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #aaa;
+    }
+
+    ul {
+      margin-top: 10px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>EPKRUPNIK</h1>
+  <p>Pobierz aplikację na swoje urządzenie</p>
+</header>
+
+<div class="container">
+  <h2>Opcje pobierania</h2>
+  <div class="downloads">
+    <div class="card">
+      <h3>Android</h3>
+      <a class="btn" href="epk.apk" download>Pobierz na Android</a>
+    </div>
+    <div class="card">
+      <h3>Windows</h3>
+      <a class="btn" href="epk.exe" download>Pobierz na Windows</a>
+    </div>
+    <div class="card">
+      <h3>iOS</h3>
+      <a class="btn" href="epk.ipa" download>Pobierz na iOS</a>
+    </div>
+  </div>
+
+  <h2>FAQ</h2>
+
+  <details>
+    <summary>Czy aplikacja jest darmowa?</summary>
+    <p>Tak, jest dostępna dla każdego.</p>
+  </details>
+
+  <details>
+    <summary>Do czego jest ta aplikacja?</summary>
+    <p>Aplikacja daje m.in.:</p>
+    <ul>
+      <li>Powiadomienia o nowych kanałach</li>
+      <li>Linki do sponsorów ze zniżkami</li>
+      <li>Rzeczy których nie znajdziesz normalnie na naszym Discordzie</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Czy aplikacja będzie prosta w użytku?</summary>
+    <p>Tak, ma proste w obsłudze GUI.</p>
+  </details>
+
+  <details>
+    <summary>Na jakie systemy będzie aplikacja?</summary>
+    <p>Pierwszo będzie dostępna na:</p>
+    <ul>
+      <li>Windows</li>
+      <li>iOS</li>
+    </ul>
+    <p>Później pojawi się także na:</p>
+    <ul>
+      <li>Android</li>
+    </ul>
+  </details>
+
+</div>
+
+<footer>
+  © 2026 EPKRUPNIK - APLIKACJA NIE JEST JESZCZE DOSTĘPNA!
+</footer>
+
+</body>
+</html>
