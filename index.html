@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>krupniczekkfr</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:linear-gradient(180deg,#050505,#0b0000);
+color:white;
+overflow-x:hidden;
+}
+
+header{
+background:#000;
+padding:20px;
+border-bottom:2px solid #ff0000;
+position:sticky;
+top:0;
+z-index:10;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+max-width:1200px;
+margin:auto;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+color:#ff2a2a;
+letter-spacing:1px;
+}
+
+.menu{
+display:flex;
+align-items:center;
+gap:22px;
+}
+
+.menu a{
+text-decoration:none;
+color:white;
+font-weight:bold;
+position:relative;
+}
+
+.menu a::after{
+content:"";
+position:absolute;
+width:0%;
+height:2px;
+background:#ff0000;
+bottom:-5px;
+left:0;
+transition:0.3s;
+}
+
+.menu a:hover::after{
+width:100%;
+}
+
+.socials{
+display:flex;
+gap:14px;
+margin-left:10px;
+}
+
+.socials a{
+width:34px;
+height:34px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#111;
+border-radius:8px;
+border:1px solid #ff000055;
+transition:0.25s;
+}
+
+.socials a:hover{
+transform:scale(1.1);
+box-shadow:0 0 10px red;
+background:#1a0000;
+}
+
+.socials img{
+width:18px;
+height:18px;
+filter:invert(1);
+}
+
+.hero{
+text-align:center;
+padding:90px 20px;
+animation:fadeIn 1.2s ease;
+}
+
+.hero h1{
+font-size:60px;
+color:#ff1a1a;
+text-shadow:0 0 15px rgba(255,0,0,0.6);
+}
+
+.hero p{
+margin-top:10px;
+opacity:0.85;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:40px 20px;
+}
+
+.card{
+background:#0e0e0e;
+border:1px solid #ff000033;
+border-radius:16px;
+padding:25px;
+margin-bottom:25px;
+transition:0.35s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+box-shadow:0 0 20px rgba(255,0,0,0.35);
+}
+
+.button{
+display:inline-block;
+margin-top:15px;
+padding:12px 22px;
+background:#ff0000;
+color:white;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+transition:0.25s;
+}
+
+.button:hover{
+background:#cc0000;
+transform:scale(1.05);
+}
+
+.dropdown{
+cursor:pointer;
+font-size:20px;
+margin-bottom:10px;
+}
+
+.dropdown-content{
+max-height:0;
+overflow:hidden;
+transition:max-height 0.4s ease;
+opacity:0.9;
+}
+
+.card.active .dropdown-content{
+max-height:500px;
+margin-top:10px;
+}
+
+.game-list{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+margin-top:15px;
+}
+
+.game{
+background:#140000;
+padding:15px;
+border-radius:10px;
+border:1px solid #ff000055;
+transition:0.3s;
+}
+
+.game:hover{
+transform:scale(1.05);
+background:#1d0000;
+}
+
+footer{
+margin-top:60px;
+padding:25px;
+text-align:center;
+background:#000;
+border-top:2px solid #ff0000;
+opacity:0.8;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+<div class="logo">krupniczekkfr</div>
+
+<div class="menu">
+<a href="#discord">Discord</a>
+<a href="#gry">Gry</a>
+<a href="https://krupniczekk.github.io/sponsorzy" target="_blank">Sponsorzy</a>
+
+<div class="socials">
+
+<a href="https://www.twitch.tv/bandwkrupnik" target="_blank" title="Twitch">
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitch.svg">
+</a>
+
+<a href="https://www.tiktok.com/@krupnik.bs" target="_blank" title="TikTok">
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg">
+</a>
+
+<a href="https://www.youtube.com/@krupnikkbtw" target="_blank" title="YouTube">
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg">
+</a>
+
+<a href="https://www.instagram.com/krupnikfr/" target="_blank" title="Instagram">
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg">
+</a>
+
+</div>
+
+</div>
+</nav>
+</header>
+
+<section class="hero">
+<h1>krupniczekkfr</h1>
+<p>Społeczność graczy i serwer Discord</p>
+</section>
+
+<div class="container">
+
+<div class="card" id="discord">
+<h2>Discord</h2>
+<p>Dołącz do naszej społeczności i graj razem z nami.</p>
+<a class="button" href="https://discord.gg/7eKDzC4m4M" target="_blank">Dołącz do Discorda</a>
+</div>
+
+<div class="card" id="gry">
+<div class="dropdown">🎮 Gry które gramy (kliknij aby rozwinąć)</div>
+
+<div class="dropdown-content">
+
+<div class="game-list">
+
+<div class="game">
+<h3>Garry's Mod</h3>
+<p>Sandbox gdzie możesz budować, robić tryby gry i różne szalone rzeczy.</p>
+</div>
+
+<div class="game">
+<h3>Counter-Strike 2</h3>
+<p>FPS oparty na skillu, taktyce i rywalizacji drużynowej.</p>
+</div>
+
+<div class="game">
+<h3>Brawl Stars</h3>
+<p>Szybka mobilna gra 3v3 z różnymi postaciami i trybami.</p>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+<footer>
+© 2026 krupniczekkfr
+</footer>
+
+<script>
+const cards = document.querySelectorAll('.card');
+
+cards.forEach(card=>{
+const drop = card.querySelector('.dropdown');
+if(drop){
+ drop.addEventListener('click',()=>{
+ card.classList.toggle('active');
+ })
+}
+})
+</script>
+
+</body>
+</html>
