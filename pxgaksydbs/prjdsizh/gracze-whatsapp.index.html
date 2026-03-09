@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Dołącz</title>
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#050505;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#00ff88;
+    overflow:hidden;
+}
+
+/* animowane tło */
+body::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background:radial-gradient(circle,#00ff8840 1px,transparent 1px);
+    background-size:40px 40px;
+    animation:moveBg 20s linear infinite;
+}
+
+@keyframes moveBg{
+    from{transform:translate(0,0);}
+    to{transform:translate(-200px,-200px);}
+}
+
+.box{
+    position:relative;
+    background:#0a0a0a;
+    padding:40px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 0 25px #00ff88;
+    animation:fade 1.5s ease;
+}
+
+@keyframes fade{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+h1{
+    margin-bottom:25px;
+    letter-spacing:2px;
+}
+
+input{
+    padding:12px;
+    width:250px;
+    border:none;
+    outline:none;
+    border-radius:6px;
+    background:#111;
+    color:#00ff88;
+    font-size:16px;
+    text-align:center;
+    box-shadow:0 0 10px #00ff88 inset;
+}
+
+button{
+    margin-top:15px;
+    padding:12px 30px;
+    border:none;
+    border-radius:6px;
+    background:#00ff88;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 15px #00ff88;
+}
+
+#error{
+    margin-top:10px;
+    color:red;
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h1>PODAJ KOD BY DOŁĄCZYĆ</h1>
+
+<input type="text" id="code" placeholder="Wpisz kod">
+<br>
+<button onclick="checkCode()">DOŁĄCZ</button>
+
+<div id="error">Niepoprawny kod</div>
+</div>
+
+<script>
+function checkCode(){
+    var code = document.getElementById("code").value;
+
+    if(code === "K5R7UPNIK"){
+        window.location.href="https://chat.whatsapp.com/GllFv1q7P58BbnZWINqJf3";
+    }else{
+        document.getElementById("error").style.display="block";
+    }
+}
+</script>
+
+</body>
+</html>
