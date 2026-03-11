@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>KRUPNIK KASINO GAME</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(135deg,#0b0b0b,#1b1b1b);
+    color:#ffd700;
+    text-align:center;
+}
+
+.container{
+    margin-top:120px;
+}
+
+h1{
+    font-size:60px;
+}
+
+.download{
+    display:inline-block;
+    margin-top:40px;
+    padding:20px 60px;
+    font-size:28px;
+    background:#ffd700;
+    color:black;
+    text-decoration:none;
+    border-radius:14px;
+    font-weight:bold;
+    transition:0.25s;
+}
+
+.download:hover{
+    transform:scale(1.08);
+    background:#ffcc00;
+}
+
+.rules-btn{
+    margin-top:30px;
+    padding:15px 40px;
+    font-size:18px;
+    background:#222;
+    color:#ffd700;
+    border:2px solid #ffd700;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.rules{
+    display:none;
+    max-width:800px;
+    margin:30px auto;
+    background:#111;
+    padding:30px;
+    border-radius:12px;
+    text-align:left;
+    color:#ddd;
+    line-height:1.6;
+}
+</style>
+
+<script>
+function toggleRules(){
+    var r = document.getElementById("rules");
+    if(r.style.display === "none"){
+        r.style.display = "block";
+    } else {
+        r.style.display = "none";
+    }
+}
+</script>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>🎰 KRUPNIK KASINO GAME</h1>
+<p>Najlepsza kasynowa symulacja krupnika</p>
+
+<a class="download" href="game.exe" download>
+Pobierz grę
+</a>
+
+<br>
+
+<button class="rules-btn" onclick="toggleRules()">
+ROZWIŃ REGULAMIN PRZED POBRANIEM
+</button>
+
+<div id="rules" class="rules">
+
+<h3>1. Informacje ogólne</h3>
+<p>
+KrupnikKasyno jest symulacją kasyna stworzoną wyłącznie w celach rozrywkowych.<br>
+Gra nie używa prawdziwych pieniędzy ani nie wypłaca nagród pieniężnych.<br>
+Każdy gracz korzysta z gry na własną odpowiedzialność.
+</p>
+
+<h3>2. Zasady korzystania z gry</h3>
+<p>
+Gracz może korzystać z dostępnych gier:<br>
+Sloty<br>
+Kości<br>
+Ruletka<br>
+Blackjack<br><br>
+
+Gra umożliwia:<br>
+zakładanie wirtualnych pożyczek w banku<br>
+zdobywanie wirtualnego XP i poziomów gracza<br><br>
+
+Wyniki gier są losowe, a saldo gracza jest wyłącznie wirtualne.<br>
+Gra nie gwarantuje żadnych nagród ani zwrotu w przypadku utraty wirtualnych środków.
+</p>
+
+<h3>3. Prawa autorskie</h3>
+<p>
+KrupnikKasyno i wszystkie jego elementy (grafika, kod, dźwięki, symbole) są chronione prawem autorskim.<br>
+Kopiowanie, rozpowszechnianie lub użycie materiałów w celach komercyjnych bez zgody autora jest zabronione.<br>
+Twórca gry nie odpowiada za działania użytkowników wykorzystujących elementy gry poza własnym projektem.
+</p>
+
+<h3>4. Ostrzeżenie prawne</h3>
+<p>
+Gra jest symulacją hazardu i nie powinna być traktowana jako prawdziwe kasyno.<br>
+Próby wymiany wirtualnych środków na prawdziwe pieniądze są niedozwolone i nieosiągalne w grze.<br>
+Wszelkie działania mające na celu oszustwo lub manipulację wynikami mogą być karalne zgodnie z obowiązującym prawem w kraju użytkownika.<br>
+Gracz korzysta z gry dobrowolnie, akceptując ryzyko utraty wirtualnych punktów.
+</p>
+
+<h3>5. Postanowienia końcowe</h3>
+<p>
+Twórca gry zastrzega sobie prawo do aktualizacji regulaminu i zasad w dowolnym czasie.<br>
+Kontynuując korzystanie z gry, gracz akceptuje wszystkie powyższe zasady.<br>
+Gra jest dostępna wyłącznie w formie symulacji rozrywkowej, bez realnej wypłaty nagród.
+</p>
+
+</div>
+
+</div>
+
+</body>
+</html>
