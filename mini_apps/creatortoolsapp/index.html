@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Index of /filestorage</title>
 <style>
-  body { font-family: "Times New Roman", Times, serif; background: white; color: black; }
+  body { font-family: "Times New Roman", Times, serif; background: white; color: black; margin: 20px; }
   a { color: blue; text-decoration: underline; }
   ul { list-style-type: none; padding-left: 20px; }
   li { margin: 2px 0; }
@@ -19,7 +19,6 @@
     font-weight: bold;
     color: black;
     text-decoration: none;
-    cursor: pointer;
   }
 
   #captchaBox {
@@ -38,8 +37,8 @@
 <body>
 
 <div class="header">
-  <h1>/filestorage</h1>
-  <a href="https://bit.ly/server-redirect-kw-verify" class="discord-link">Discord</a>
+  <h1 style="margin:0;">/filestorage</h1>
+  <a href="https://bit.ly/server-redirect-kw-verify" class="discord-link" target="_blank">Discord</a>
 </div>
 
 <ul>
@@ -49,8 +48,8 @@
         <ul>
           <li><strong>sybau</strong>
             <ul>
-              <li><a href="#" onclick="startDownload('templates/sybau/background.jpg')">background.jpg</a></li>
-              <li><a href="#" onclick="startDownload('templates/sybau/full_template.zip')">full_template.zip</a></li>
+              <li><a href="#" onclick="startDownload('sybau/background.jpg')">background.jpg</a></li>
+              <li><a href="#" onclick="startDownload('sybau/full_template.zip')">full_template.zip</a></li>
             </ul>
           </li>
           <li><strong>meme</strong>
@@ -94,7 +93,7 @@ function generateCaptcha() {
 }
 
 function startDownload(file) {
-  currentFile = file;
+  currentFile = file; // faktyczna ścieżka
   document.getElementById("captchaBox").style.display = "block";
   generateCaptcha();
 }
