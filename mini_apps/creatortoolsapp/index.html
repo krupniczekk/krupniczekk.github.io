@@ -6,33 +6,35 @@
 <style>
   body { font-family: "Times New Roman", Times, serif; background: white; color: black; }
   a { color: blue; text-decoration: underline; }
-  table { width: 100%; border-collapse: collapse; }
-  th { text-align: left; padding: 5px; }
-  td { padding: 5px; }
-  hr { border: none; border-top: 1px solid #999; }
+  ul { list-style-type: none; padding-left: 20px; }
+  li { margin: 2px 0; }
 </style>
 </head>
 <body>
 
 <h1>Index of /filestorage</h1>
 
-<table>
-  <tr><th>Name</th></tr>
-
-  <!-- Parent directory -->
-  <tr><td><a href="../">Parent Directory</a></td></tr>
-
-  <!-- Folder sybau wirtualny -->
-  <tr><td><a href="sybau/">assets/sybau/</a></td></tr>
-  <tr><td><a href="sybau/background.jpg" download>assets/sybau/background.jpg</a></td></tr>
-  <tr><td><a href="sybau/full_template.zip" download>assets/sybau/full_template.zip</a></td></tr>
-
-  <!-- Wirtualny plik fonts.zip -->
-  <tr><td><a href="meme_temps/fonts.zip" download>assets/templates/meme/fonts.zip</a></td></tr>
-
-</table>
-
-<hr>
+<ul>
+  <li><strong>assets</strong>
+    <ul>
+      <li><strong>sybau</strong>
+        <ul>
+          <li><a href="sybau/background.jpg" download>background.jpg</a></li>
+          <li><a href="sybau/full_template.zip" download>full_template.zip</a></li>
+        </ul>
+      </li>
+      <li><strong>templates</strong>
+        <ul>
+          <li><strong>meme</strong>
+            <ul>
+              <li><a href="meme_temps/fonts.zip" download>fonts.zip</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
 
 </body>
 </html>
