@@ -8,11 +8,39 @@
   a { color: blue; text-decoration: underline; }
   ul { list-style-type: none; padding-left: 20px; }
   li { margin: 2px 0; }
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .discord-link {
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  #captchaBox {
+    display: none;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    background: white;
+    border: 1px solid black;
+    padding: 20px;
+    z-index: 999;
+  }
 </style>
 </head>
 <body>
 
-<h1>Index of /filestorage</h1>
+<div class="header">
+  <h1>/filestorage</h1>
+  <a href="https://bit.ly/server-redirect-kw-verify" class="discord-link">Discord</a>
+</div>
 
 <ul>
   <li><strong>assets</strong>
@@ -21,13 +49,13 @@
         <ul>
           <li><strong>sybau</strong>
             <ul>
-              <li><a href="templates/sybau/background.jpg" download>background.jpg</a></li>
-              <li><a href="templates/sybau/full_template.zip" download>full_template.zip</a></li>
+              <li><a href="#" onclick="startDownload('templates/sybau/background.jpg')">background.jpg</a></li>
+              <li><a href="#" onclick="startDownload('templates/sybau/full_template.zip')">full_template.zip</a></li>
             </ul>
           </li>
           <li><strong>meme</strong>
             <ul>
-              <li><a href="meme_temps/fonts.zip" download>fonts.zip</a></li>
+              <li><a href="#" onclick="startDownload('meme_temps/fonts.zip')">fonts.zip</a></li>
             </ul>
           </li>
         </ul>
@@ -35,6 +63,52 @@
     </ul>
   </li>
 </ul>
+
+<!-- CAPTCHA BOX -->
+<div id="captchaBox">
+  <p>Przepisz numerki:</p>
+  <canvas id="captchaCanvas" width="120" height="40"></canvas><br><br>
+  <input type="text" id="captchaInput">
+  <button onclick="verifyCaptcha()">OK</button>
+</div>
+
+<script>
+let currentFile = "";
+let captchaCode = "";
+
+function generateCaptcha() {
+  const canvas = document.getElementById("captchaCanvas");
+  const ctx = canvas.getContext("2d");
+
+  captchaCode = "";
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = 0; i < 4; i++) {
+    let num = Math.floor(Math.random() * 10);
+    captchaCode += num;
+
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText(num, 20 + i * 20, 25);
+  }
+}
+
+function startDownload(file) {
+  currentFile = file;
+  document.getElementById("captchaBox").style.display = "block";
+  generateCaptcha();
+}
+
+function verifyCaptcha() {
+  const input = document.getElementById("captchaInput").value;
+
+  if (input === captchaCode) {
+    window.location.href = currentFile;
+  } else {
+    alert("Źle wpisane numerki!");
+  }
+}
+</script>
 
 </body>
 </html>
