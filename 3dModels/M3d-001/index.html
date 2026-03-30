@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>3D Viewer OBJ</title>
   <style>
-    body { margin: 0; overflow: hidden; }
+    body { margin: 0; overflow: hidden; background: #000; }
     canvas { display: block; }
   </style>
 </head>
@@ -16,14 +16,8 @@
 
 <script>
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x222222);
 
-  const camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-  );
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.z = 5;
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -32,14 +26,38 @@
 
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.5;
 
-  const light = new THREE.DirectionalLight(0xffffff, 1);
+  // LIGHT
+  const light = new THREE.DirectionalLight(0xffffff, 1.2);
   light.position.set(5, 5, 5);
   scene.add(light);
 
-  const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+  const ambient = new THREE.AmbientLight(0xffffff, 0.6);
   scene.add(ambient);
 
+  // GALAXY STARS
+  const starGeometry = new THREE.BufferGeometry();
+  const starCount = 3000;
+
+  const positions = new Float32Array(starCount * 3);
+
+  for (let i = 0; i < starCount * 3; i++) {
+    positions[i] = (Math.random() - 0.5) * 200;
+  }
+
+  starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+  const starMaterial = new THREE.PointsMaterial({
+    color: 0xffffff,
+    size: 0.7
+  });
+
+  const stars = new THREE.Points(starGeometry, starMaterial);
+  scene.add(stars);
+
+  // MODEL
   const loader = new THREE.OBJLoader();
   loader.load('V-9453.obj', function (object) {
     object.scale.set(1, 1, 1);
@@ -56,6 +74,11 @@
 
   function animate() {
     requestAnimationFrame(animate);
+
+    // galaxy animation
+    stars.rotation.y += 0.0005;
+    stars.rotation.x += 0.0002;
+
     controls.update();
     renderer.render(scene, camera);
   }
