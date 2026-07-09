@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AKADK Store - Sklep</title>
+    <title>AKADK Store</title>
     <style>
         * {
             margin: 0;
@@ -13,155 +13,109 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 50%, #0f0f1f 100%);
+            background: #0a0a0a;
             color: #fff;
-            overflow-x: hidden;
-            min-height: 100vh;
-            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 100vh;
         }
 
-        /* Weather Effects Canvas */
-        #weather-canvas {
+        /* Canvas background */
+        #background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
             z-index: 1;
         }
 
-        /* Neon glow effect */
-        .neon-glow {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
-            animation: glowPulse 4s ease-in-out infinite;
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.6; }
-        }
-
-        /* Main content */
+        /* Content container */
         .container {
-            position: relative;
-            z-index: 10;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 500px;
+            background: rgba(10, 10, 10, 0.95);
+            border: 3px solid #ff0000;
+            border-radius: 15px;
+            padding: 40px;
             text-align: center;
-        }
-
-        /* Header */
-        header {
-            padding: 40px 20px;
-            background: rgba(10, 10, 26, 0.8);
+            z-index: 10;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.6), 
+                        0 0 80px rgba(0, 0, 0, 0.8),
+                        inset 0 0 20px rgba(255, 0, 0, 0.2);
             backdrop-filter: blur(10px);
-            border-bottom: 3px solid #00ffff;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
-            margin-bottom: 50px;
-            border-radius: 10px;
         }
 
-        .logo-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
+        /* Logo */
+        .logo-container {
+            margin-bottom: 25px;
         }
 
         .logo-image {
-            max-width: 120px;
+            max-width: 100px;
             height: auto;
-            filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #ff00ff);
-            animation: logoFloat 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px #ff0000) brightness(1.1);
+            animation: logoPulse 2s ease-in-out infinite;
         }
 
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        @keyframes logoPulse {
+            0%, 100% { 
+                filter: drop-shadow(0 0 15px #ff0000) brightness(1.1);
+                transform: scale(1);
+            }
+            50% { 
+                filter: drop-shadow(0 0 25px #ff0000) brightness(1.3);
+                transform: scale(1.05);
+            }
         }
 
+        /* Title */
         h1 {
-            font-size: 48px;
-            background: linear-gradient(45deg, #00ffff, #ff00ff, #00ffff);
+            font-size: 36px;
+            background: linear-gradient(45deg, #ff0000, #cc0000);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-            letter-spacing: 3px;
-            animation: titleGlow 2s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
-        @keyframes titleGlow {
-            0%, 100% { filter: drop-shadow(0 0 10px #00ffff); }
-            50% { filter: drop-shadow(0 0 30px #ff00ff); }
-        }
-
-        /* Main content area */
-        .content {
-            background: rgba(26, 10, 46, 0.7);
-            backdrop-filter: blur(15px);
-            border: 2px solid #00ffff;
-            border-radius: 15px;
-            padding: 50px 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.3),
-                        inset 0 0 20px rgba(255, 0, 255, 0.1);
-            animation: contentPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes contentPulse {
-            0%, 100% { box-shadow: 0 0 40px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(255, 0, 255, 0.1); }
-            50% { box-shadow: 0 0 60px rgba(0, 255, 255, 0.5), inset 0 0 30px rgba(255, 0, 255, 0.2); }
-        }
-
-        .content p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: #e0e0ff;
+        /* Description */
+        .description {
+            font-size: 14px;
+            color: #e0e0e0;
             margin-bottom: 30px;
+            line-height: 1.6;
         }
 
         /* Discord Button */
-        .button-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .discord-button {
+        .discord-btn {
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            padding: 18px 35px;
-            background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #cc0000 0%, #ff0000 100%);
             color: white;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 8px;
+            border: 2px solid #ff0000;
             font-weight: bold;
-            font-size: 18px;
-            border: 2px solid #ff00ff;
+            font-size: 16px;
             transition: all 0.3s ease;
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.6),
-                        0 0 60px rgba(255, 0, 255, 0.4);
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
             cursor: pointer;
             position: relative;
             overflow: hidden;
         }
 
-        .discord-button::before {
+        .discord-btn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -172,176 +126,193 @@
             transition: left 0.5s ease;
         }
 
-        .discord-button:hover::before {
+        .discord-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.9),
+                        0 0 60px rgba(255, 0, 0, 0.6);
+            background: linear-gradient(135deg, #ff0000 0%, #ff3333 100%);
+        }
+
+        .discord-btn:hover::before {
             left: 100%;
         }
 
-        .discord-button:hover {
-            transform: scale(1.08) translateY(-3px);
-            box-shadow: 0 0 50px rgba(255, 0, 0, 0.9),
-                        0 0 100px rgba(255, 0, 255, 0.7);
-            background: linear-gradient(135deg, #ff3333 0%, #ff0000 100%);
-        }
-
-        .discord-button:active {
-            transform: scale(0.98);
+        .discord-btn:active {
+            transform: scale(0.95);
         }
 
         .discord-icon {
-            width: 28px;
-            height: 28px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36"><defs><style>.cls-1{fill:%23fff;}</style></defs><g id="Layer_2"><g id="Discord_Logos"><g id="Discord_Logo_-_Large_-_White"><path class="cls-1" d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A99.68,99.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36a77.7,77.7,0,0,0,6.89-11.18,68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a77.15,77.15,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.22,77,77,0,0,0,6.89,11.1,106.51,106.51,0,0,0,32.19-16.15h0C129.94,79.82,122.88,55.64,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60.55,31,53.88s5-11.8,11.43-11.8S53.89,47.16,53.87,53.88,48.7,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60.55,73.25,53.88s5-11.8,11.44-11.8S96.11,47.16,96.09,53.88,90.95,65.69,84.7,65.69Z"/></g></g></g></svg>') center/contain no-repeat;
-            filter: brightness(2);
-        }
-
-        .button-text {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .button-text span:first-child {
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .button-text span:last-child {
-            font-size: 13px;
-            opacity: 0.9;
+            width: 24px;
+            height: 24px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36"><path fill="%23fff" d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A99.68,99.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36a77.7,77.7,0,0,0,6.89-11.18,68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a77.15,77.15,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.22,77,77,0,0,0,6.89,11.1,106.51,106.51,0,0,0,32.19-16.15h0C129.94,79.82,122.88,55.64,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60.55,31,53.88s5-11.8,11.43-11.8S53.89,47.16,53.87,53.88,48.7,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60.55,73.25,53.88s5-11.8,11.44-11.8S96.11,47.16,96.09,53.88,90.95,65.69,84.7,65.69Z"/></svg>') center/contain no-repeat;
         }
 
         /* Footer */
         footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
             text-align: center;
-            padding: 30px;
-            background: rgba(10, 10, 26, 0.8);
-            border-top: 2px solid #ff00ff;
-            border-radius: 10px;
-            color: #b0b0ff;
-            position: relative;
+            padding: 15px;
+            background: rgba(10, 10, 10, 0.95);
+            border-top: 2px solid #ff0000;
+            color: #ff0000;
+            font-size: 12px;
+            letter-spacing: 1px;
             z-index: 10;
-            box-shadow: 0 -0 20px rgba(255, 0, 255, 0.3);
+            box-shadow: 0 -0 20px rgba(255, 0, 0, 0.3);
+        }
+
+        /* Clock and Weather displays */
+        .info-bar {
+            position: fixed;
+            top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            z-index: 5;
+            padding: 0 20px;
+        }
+
+        .info-box {
+            background: rgba(20, 0, 0, 0.8);
+            border: 2px solid #ff0000;
+            border-radius: 8px;
+            padding: 12px 20px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+        }
+
+        .info-label {
+            font-size: 11px;
+            color: #ff6666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff0000;
+            font-family: 'Courier New', monospace;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 32px;
-            }
-
-            .content {
+        @media (max-width: 600px) {
+            .container {
+                max-width: 90vw;
                 padding: 30px 20px;
             }
 
-            .discord-button {
-                padding: 14px 25px;
-                font-size: 16px;
+            h1 {
+                font-size: 28px;
             }
 
-            .logo-image {
-                max-width: 80px;
+            .discord-btn {
+                font-size: 14px;
+                padding: 12px 20px;
             }
-        }
 
-        /* Weather info text */
-        .weather-info {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0, 255, 255, 0.1);
-            padding: 10px 15px;
-            border-radius: 8px;
-            border: 1px solid #00ffff;
-            font-size: 12px;
-            z-index: 11;
-            backdrop-filter: blur(5px);
+            .info-bar {
+                flex-wrap: wrap;
+                gap: 10px;
+                justify-content: center;
+            }
+
+            .info-box {
+                min-width: 120px;
+            }
         }
 
     </style>
 </head>
 <body>
 
-<!-- Canvas for weather effects -->
-<canvas id="weather-canvas"></canvas>
+<!-- Background canvas for animations -->
+<canvas id="background"></canvas>
 
-<!-- Neon glow overlay -->
-<div class="neon-glow"></div>
-
-<!-- Weather info -->
-<div class="weather-info" id="weather-info">Wczytywanie pogody...</div>
-
-<!-- Main container -->
-<div class="container">
-    <header>
-        <div class="logo-section">
-            <img src="logo.png" alt="AKADK Logo" class="logo-image">
-            <h1>AKADK STORE</h1>
-        </div>
-    </header>
-
-    <div class="content">
-        <p>Witaj w sklepie AKADK! 🎮</p>
-        <p>Dołącz do naszej społeczności na Discordzie i otrzymaj dostęp do ekskluzywnych ofert i wsparcia.</p>
-        
-        <div class="button-container">
-            <a href="https://discord.gg/nq2zXQANyE" target="_blank" class="discord-button">
-                <div class="discord-icon"></div>
-                <div class="button-text">
-                    <span>Przekieruj na sklep</span>
-                    <span>Dołącz do Discord</span>
-                </div>
-            </a>
-        </div>
+<!-- Info bar with clock and weather -->
+<div class="info-bar">
+    <div class="info-box">
+        <div class="info-label">⏰ Czas</div>
+        <div class="info-value" id="clock">00:00:00</div>
     </div>
-
-    <footer>
-        © 2026 AKADK Store - Wszystkie prawa zastrzeżone
-    </footer>
+    <div class="info-box">
+        <div class="info-label">🌡️ Pogoda</div>
+        <div class="info-value" id="weather">Zima</div>
+    </div>
 </div>
 
-<script>
-    // Get current time and date for weather effects
-    const now = new Date();
-    const hour = now.getHours();
-    const month = now.getMonth();
+<!-- Main content -->
+<div class="container">
+    <div class="logo-container">
+        <img src="logo.png" alt="AKADK Logo" class="logo-image">
+    </div>
     
-    let weatherType = 'none';
-    let weatherText = '';
+    <h1>AKADK STORE</h1>
+    
+    <p class="description">
+        Dołącz do naszej społeczności na Discordzie
+    </p>
+    
+    <a href="https://discord.gg/nq2zXQANyE" target="_blank" class="discord-btn">
+        <div class="discord-icon"></div>
+        <span>Przejdź na sklep</span>
+    </a>
+</div>
 
-    // Determine weather based on time and month
-    if (month >= 11 || month <= 2) {
-        // Winter: Snow
-        weatherType = 'snow';
-        weatherText = '❄️ Śnieg - Zima';
-    } else if (month >= 5 && month <= 8) {
-        // Summer: Rain
-        weatherType = 'rain';
-        weatherText = '🌧️ Deszcz - Lato';
-    } else if (month === 3 || month === 4 || month === 9 || month === 10) {
-        // Spring/Autumn: Mixed or leaves
-        weatherType = 'autumn';
-        weatherText = '🍂 Jesień - Liście';
-    }
+<!-- Footer -->
+<footer>
+    © Copyright AKADK × KRUPNICZEKK
+</footer>
 
-    // Update weather info
-    document.getElementById('weather-info').textContent = `${weatherText} (${hour}:${now.getMinutes().toString().padStart(2, '0')})`;
-
-    // Canvas animation for weather effects
-    const canvas = document.getElementById('weather-canvas');
+<script>
+    // Canvas setup
+    const canvas = document.getElementById('background');
     const ctx = canvas.getContext('2d');
-    let particles = [];
-
+    
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    let particles = [];
+    let weatherType = 'none';
+
+    // Determine weather based on month
+    function updateWeather() {
+        const month = new Date().getMonth();
+        const weatherEl = document.getElementById('weather');
+        
+        if (month >= 11 || month <= 2) {
+            weatherType = 'snow';
+            weatherEl.textContent = '❄️ Śnieg';
+        } else if (month >= 5 && month <= 8) {
+            weatherType = 'rain';
+            weatherEl.textContent = '🌧️ Deszcz';
+        } else {
+            weatherType = 'autumn';
+            weatherEl.textContent = '🍂 Jesień';
+        }
+    }
+
+    // Clock update
+    function updateClock() {
+        const now = new Date();
+        const time = now.toLocaleTimeString('pl-PL');
+        document.getElementById('clock').textContent = time;
+    }
+
+    // Particle system for weather
     class Particle {
         constructor() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height - canvas.height;
-            this.size = Math.random() * 3 + 1;
+            this.size = Math.random() * 2 + 1;
             this.speedY = Math.random() * 2 + 1;
-            this.speedX = weatherType === 'rain' ? (Math.random() - 0.5) * 2 : Math.random() - 0.5;
-            this.opacity = Math.random() * 0.5 + 0.3;
+            this.speedX = weatherType === 'rain' ? (Math.random() - 0.5) * 1.5 : Math.random() - 0.5;
+            this.opacity = Math.random() * 0.4 + 0.2;
         }
 
         update() {
@@ -358,21 +329,21 @@
         }
 
         draw() {
-            ctx.fillStyle = weatherType === 'snow' 
-                ? `rgba(255, 255, 255, ${this.opacity})`
-                : weatherType === 'rain'
-                ? `rgba(0, 150, 255, ${this.opacity})`
-                : `rgba(255, 200, 0, ${this.opacity})`;
-            
             if (weatherType === 'snow') {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
             } else if (weatherType === 'rain') {
-                ctx.fillRect(this.x, this.y, 2, this.size * 3);
-            } else {
+                ctx.strokeStyle = `rgba(0, 100, 255, ${this.opacity})`;
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x - this.speedX, this.y - this.speedY * 5);
+                ctx.stroke();
+            } else if (weatherType === 'autumn') {
                 ctx.globalAlpha = this.opacity;
-                ctx.font = '20px Arial';
+                ctx.font = '16px Arial';
                 ctx.fillText('🍂', this.x, this.y);
                 ctx.globalAlpha = 1;
             }
@@ -380,15 +351,22 @@
     }
 
     // Initialize particles
-    if (weatherType !== 'none') {
-        for (let i = 0; i < 80; i++) {
-            particles.push(new Particle());
+    function initParticles() {
+        particles = [];
+        if (weatherType !== 'none') {
+            for (let i = 0; i < 50; i++) {
+                particles.push(new Particle());
+            }
         }
     }
 
+    // Animation loop
     function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Semi-transparent background for motion blur
+        ctx.fillStyle = 'rgba(10, 10, 10, 0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+        // Draw particles
         particles.forEach(particle => {
             particle.update();
             particle.draw();
@@ -397,18 +375,21 @@
         requestAnimationFrame(animate);
     }
 
-    animate();
-
-    // Handle window resize
+    // Window resize handler
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     });
 
-    // Reduce particle count on mobile
-    if (window.innerWidth < 768) {
-        particles = particles.slice(0, Math.ceil(particles.length / 2));
-    }
+    // Update clock every second
+    setInterval(updateClock, 1000);
+
+    // Initialize
+    updateClock();
+    updateWeather();
+    initParticles();
+    animate();
+
 </script>
 
 </body>
